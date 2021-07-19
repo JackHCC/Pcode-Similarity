@@ -25,6 +25,20 @@ public class Similarity {
   public Similarity(ArrayList<byte []> t, ArrayList<ArrayList<byte []>> lib) {
     this.target = t;
     this.lib = lib;
+    this.getLibSize(this.lib);
+    this.getStrandNum(this.target, this.lib);
+    this.getStrandProbabilityReverse(this.strandNumMap, this.sizeOfLib);
+  }
+
+//  public Similarity(ArrayList<ArrayList<byte []>> lib){
+//    this.lib =lib;
+//    this.getLibSize(this.lib);
+//    this.getStrandNum(this.target, this.lib);
+//    this.getStrandProbabilityReverse(this.strandNumMap, this.sizeOfLib);
+//  }
+
+  public Similarity(ArrayList<HashMap<String, ArrayList<byte []>>> lib){
+
   }
 
   public ArrayList<String> intersection(ArrayList<String> queryHash, ArrayList<String> targetHash) {
@@ -120,6 +134,28 @@ public class Similarity {
     return strandNumMap;
   }
 
+  public HashMap getQueryStrandNum(ArrayList<byte []> query, ArrayList<ArrayList<byte []>> lib){
+    ArrayList<String> qString = byte2str(query);
+
+    strandNumMap = new HashMap();
+    for(int i = 0; i < qString.size(); i++){
+      BigInteger countStrand = new BigInteger("0");
+      String itemOft = qString.get(i);
+
+      for(int j = 0; j < lib.size(); j++){
+        for(int k = 0; k< lib.get(j).size(); k++){
+          String libStrandsItem = byte2str(lib.get(j).get(k));
+          if (libStrandsItem.equals(itemOft)){
+            countStrand = countStrand.add(BigInteger.valueOf(Long.parseLong("1")));
+
+          }
+        }
+      }
+      strandNumMap.put(itemOft, countStrand);
+    }
+    return strandNumMap;
+  }
+
 //  public static HashMap strandProbabilityReverse(HashMap strandNum, BigInteger P){
 //    HashMap probabilityReverseList = new HashMap();
 //    strandNum.forEach((k, v) -> {
@@ -176,8 +212,9 @@ public class Similarity {
 //    return relativelySim;
 //  }
 
-  public Double getRelativelySim(ArrayList<String> arrayT, ArrayList<String> arrayQ, ArrayList<String> arrayIntersection, HashMap strandProbabilityReverse){
-    relativelySimScore = getSim(arrayIntersection, strandProbabilityReverse)/Math.sqrt(getSim(arrayT, strandProbabilityReverse)*getSim(arrayQ, strandProbabilityReverse));
+  public Double getRelativelySim(ArrayList<String> arrayT, ArrayList<byte []> arrayQ, ArrayList<String> arrayIntersection, HashMap strandProbabilityReverse){
+    HashMap qStrandProbabilityReverse = getStrandProbabilityReverse(getStrandNum(arrayQ, lib), sizeOfLib);
+    relativelySimScore = getSim(arrayIntersection, strandProbabilityReverse)/Math.sqrt(getSim(arrayT, strandProbabilityReverse)*getSim(byte2str(arrayQ), qStrandProbabilityReverse));
     return relativelySimScore;
   }
 

@@ -47,7 +47,8 @@ public class Main {
             sim.listIntersection = sim.intersection(byte2str(sim.target), byte2str(sim.query));
 
             sim.simScore = sim.getSim(sim.listIntersection, sim.probabilityReverseMap);
-            sim.relativelySimScore = sim.getRelativelySim(byte2str(sim.target), byte2str(sim.query), sim.listIntersection, sim.probabilityReverseMap);
+            sim.relativelySimScore = sim.getRelativelySim(byte2str(sim.target), sim.query, sim.listIntersection, sim.probabilityReverseMap);
+
 
             /**
              * Print
@@ -67,8 +68,5 @@ public class Main {
         }
 
     }
-
-
-
 }
 
