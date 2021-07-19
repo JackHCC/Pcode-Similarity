@@ -24,6 +24,25 @@ public class HashConvert {
         return hashStrands;
     }
 
+    public static ArrayList<ArrayList<byte []>> calcLibHash(ArrayList<ArrayList<String>> libStrand)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        ArrayList<ArrayList<byte []>> libHash= new ArrayList<>();
+        for (int i =0; i< libStrand.size(); i++) {
+            ArrayList<byte []> hashStrands = new ArrayList<>();
+            ArrayList<String> strands = libStrand.get(i);
+            for (int j = 0; j < strands.size(); j++) {
+                String strand = strands.get(j);
+                byte[] bytesOfMessage = strand.getBytes("UTF-8");
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                byte[] hash = md.digest(bytesOfMessage);
+                hashStrands.add(hash);
+            }
+            libHash.add(hashStrands);
+        }
+
+        return libHash;
+    }
+
     /**
      * Hash to String: Using to test!!!
      * */
