@@ -1,0 +1,6 @@
+[ ---  CBRANCH (ram, 0x20fc2b, 1) , (register, 0x206, 1), (register, 0x206, 1) INT_EQUAL (unique, 0x10000012, 4) , (const, 0x0, 4), (unique, 0x10000012, 4) INT_AND (register, 0x30, 4) , (const, 0x40, 4)]
+[ ---  CBRANCH (ram, 0x20fc2b, 1) , (register, 0x206, 1), (register, 0x206, 1) INT_NOTEQUAL (register, 0x0, 4) , (const, 0x410000, 4), (register, 0x0, 4) INT_AND (register, 0x30, 4) , (const, 0x410000, 4)]
+[ ---  CALL (ram, 0x234d10, 8) , (unique, 0x1000002c, 8), (unique, 0x1000002c, 8) COPY (const, 0x2b9c20, 8)]
+[ ---  RETURN (const, 0x1, 4)]
+[ ---  CALL (ram, 0x20fc40, 8) , (register, 0x38, 8) , (register, 0x30, 4)]
+[ ---  RETURN (const, 0x0, 8)]

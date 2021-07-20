@@ -1,0 +1,2 @@
+[ ---  STORE (const, 0x1b1, 4) , (unique, 0x3100, 8) , (unique, 0xbe00, 8), (unique, 0xbe00, 8) INT_OR (unique, 0xbe00, 8) , (const, 0x2000, 8), (unique, 0xbe00, 8) LOAD (const, 0x1b1, 4) , (unique, 0x3100, 8), (unique, 0x3100, 8) CAST (unique, 0x10000000, 8), (unique, 0x10000000, 8) INT_ADD (unique, 0xbd80, 8) , (const, 0x8, 8), (unique, 0xbd80, 8) LOAD (const, 0x1b1, 4) , (register, 0x38, 8)]
+[ ---  RETURN (const, 0x0, 8)]

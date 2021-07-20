@@ -1,0 +1,2 @@
+[ ---  CALLOTHER (const, 0x63, 4) , (stack, 0x8, 10) , (register, 0x1000, 10), (register, 0x1000, 10) INT2FLOAT (register, 0x38, 4)]
+[ ---  RETURN (const, 0x0, 8)]

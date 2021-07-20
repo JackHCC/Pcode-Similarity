@@ -1,0 +1,2 @@
+[ ---  CALLIND (register, 0x30, 8) , (register, 0x38, 8) , (register, 0x10, 8) , (register, 0x10, 8) , (register, 0x30, 8), (register, 0x38, 8) INT_ADD (unique, 0xbd80, 8) , (const, 0x10, 8), (unique, 0xbd80, 8) LOAD (const, 0x1b1, 4) , (unique, 0x3100, 8), (unique, 0x3100, 8) CAST (unique, 0x10000009, 8), (unique, 0x10000009, 8) INT_ADD (register, 0x38, 8) , (const, 0x40, 8)]
+[ ---  RETURN (const, 0x1, 4)]
