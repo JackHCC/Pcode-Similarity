@@ -1,4 +1,0 @@
-[(register, 0x0, 4) COPY (const, 0x0, 4)]
-[ ---  CBRANCH (ram, 0x223408, 1) , (unique, 0xc800, 1), (unique, 0xc800, 1) INT_LESS (unique, 0x10000023, 2) , (const, 0x13, 2), (unique, 0x10000023, 2) CAST (register, 0x38, 2), (register, 0x38, 2) INT_SUB (register, 0x38, 2) , (const, 0x1, 2)]
-[(unique, 0xbc80, 4) LOAD (const, 0x1b1, 4) , (unique, 0x10000027, 8), (unique, 0x10000027, 8) CAST (unique, 0x3400, 8), (unique, 0x3400, 8) PTRADD (unique, 0x1000001b, 8) , (unique, 0x3300, 8) , (const, 0x1, 8), (unique, 0x1000001b, 8) PTRSUB (const, 0x0, 8) , (const, 0x2b1f20, 8), (unique, 0x3300, 8) INT_MULT (register, 0x38, 8) , (const, 0x4, 8), (register, 0x38, 8) INT_ZEXT (unique, 0x10000025, 2), (unique, 0x10000025, 2) CAST (register, 0x38, 2)]
-[ ---  RETURN (const, 0x0, 8) , (register, 0x0, 4), (register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (unique, 0xbc80, 4)]

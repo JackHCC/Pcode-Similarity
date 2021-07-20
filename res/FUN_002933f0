@@ -1,5 +1,0 @@
-[ ---  CBRANCH (ram, 0x232a00, 1) , (register, 0x200, 1), (register, 0x200, 1) INT_LESSEQUAL (register, 0x10, 8) , (register, 0x8, 8)]
-[ ---  CALL (ram, 0x234d10, 8) , (unique, 0x1000001a, 8), (unique, 0x1000001a, 8) COPY (const, 0x2b6905, 8)]
-[ ---  RETURN (const, 0x1, 4)]
-[ ---  CALLOTHER (const, 0x274, 4) , (unique, 0xbaa00, 16), (unique, 0xbaa00, 16) CALLOTHER (const, 0x147, 4) , (register, 0x30, 4)]
-[ ---  RETURN (const, 0x1, 4)]

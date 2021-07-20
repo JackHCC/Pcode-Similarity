@@ -1,2 +1,0 @@
-[ ---  STORE (const, 0x1b1, 4) , (unique, 0x10000008, 8) , (unique, 0xbc80, 4), (unique, 0x10000008, 8) PTRSUB (register, 0x38, 8) , (const, 0x0, 8), (unique, 0xbc80, 4) INT_AND (unique, 0xbc80, 4) , (const, 0xffffffcf, 4), (unique, 0xbc80, 4) LOAD (const, 0x1b1, 4) , (unique, 0x10000000, 8), (unique, 0x10000000, 8) PTRSUB (register, 0x38, 8) , (const, 0x0, 8)]
-[ ---  RETURN (const, 0x0, 8)]
