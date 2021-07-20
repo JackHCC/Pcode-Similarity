@@ -1,5 +1,6 @@
 package com.jackcc;
 
+import com.jackcc.util.JdbcDao;
 import com.jackcc.util.Similarity;
 
 import java.io.IOException;
@@ -16,9 +17,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 
-        // Init strands
+//         Init strands
 
-        ArrayList<String> strand = convert2Strand("res/puts_strands");
+        ArrayList<String> strand = convert2Strand("res/open");
 
         // Construct the target procedure
         ArrayList<byte[]> strandByteHash = calcStrandHash(strand);
@@ -54,16 +55,16 @@ public class Main {
              * Print
              * */
             System.out.println("--------------------------------------------------------------------------------");
-            System.out.println(sim.sizeOfLib);
+//            System.out.println(sim.sizeOfLib);
+//
+//            System.out.println(sim.strandNumMap);
+//            System.out.println(sim.probabilityReverseMap);
+//
+//            System.out.println(sim.target);
+//            System.out.println(sim.query);
+//            System.out.println(sim.listIntersection);
 
-            System.out.println(sim.strandNumMap);
-            System.out.println(sim.probabilityReverseMap);
-
-            System.out.println(sim.target);
-            System.out.println(sim.query);
-            System.out.println(sim.listIntersection);
-
-            System.out.println(sim.simScore);
+//            System.out.println(sim.simScore);
             System.out.println(sim.relativelySimScore);
         }
 

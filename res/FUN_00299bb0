@@ -1,0 +1,4 @@
+[(ram, 0x2bcabc, 4) COPY (ram, 0x2bcabc, 4)]
+[(ram, 0x2bdd40, 4) COPY (ram, 0x2bdd40, 4)]
+[(ram, 0x2bdd44, 4) COPY (ram, 0x2bdd44, 4)]
+[ ---  RETURN (const, 0x0, 8)]

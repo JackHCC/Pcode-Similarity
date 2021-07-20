@@ -1,0 +1,3 @@
+[ ---  STORE (const, 0x1b1, 4) , (register, 0x38, 8) , (const, 0x0, 4)]
+[ ---  CALLOTHER (const, 0x5, 4)]
+[ ---  RETURN (const, 0x0, 8) , (VARIABLE, 0x0, 4), (VARIABLE, 0x0, 4) INT_ADD (unique, 0x10000020, 16) , (const, 0xca, 8), (unique, 0x10000020, 16) INT_LEFT (unique, 0x10000010, 16) , (const, 0x40, 16), (unique, 0x10000010, 16) INT_SEXT (unique, 0x10000030, 8), (unique, 0x10000030, 8) CAST (register, 0x10, 8)]
