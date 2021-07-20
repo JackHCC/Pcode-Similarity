@@ -1,2 +1,0 @@
-[(ram, 0x4eb2e8, 8) COPY (unique, 0xbd80, 8), (unique, 0xbd80, 8) LOAD (const, 0x1b1, 4) , (register, 0x38, 8)]
-[ ---  RETURN (const, 0x0, 8)]

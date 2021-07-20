@@ -1,13 +1,17 @@
 package com.jackcc.util;
 
-import javax.sql.rowset.serial.SerialBlob;
+import com.jackcc.db.JdbcDao;
+
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class HashConvert {
@@ -29,8 +33,10 @@ public class HashConvert {
     }
 
     public static ArrayList<ArrayList<byte []>> calcLibHash(ArrayList<ArrayList<String>> libStrand)
-            throws NoSuchAlgorithmException, UnsupportedEncodingException {
+            throws NoSuchAlgorithmException, IOException, SQLException {
         ArrayList<ArrayList<byte []>> libHash= new ArrayList<>();
+
+
         for (int i =0; i< libStrand.size(); i++) {
             ArrayList<byte []> hashStrands = new ArrayList<>();
             ArrayList<String> strands = libStrand.get(i);
@@ -41,10 +47,26 @@ public class HashConvert {
                 byte[] hash = md.digest(bytesOfMessage);
                 hashStrands.add(hash);
             }
+
+
             libHash.add(hashStrands);
         }
 
         return libHash;
+    }
+
+    public static String calcHash(ArrayList<String> strands)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        String data = new String();
+
+        for (int index = 0; index < strands.size(); index++) {
+            data  += strands.get(index);
+        }
+        byte[] bytesOfMessage = data.getBytes("UTF-8");
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] hash = md.digest(bytesOfMessage);
+
+        return byte2str(hash);
     }
 
     /**
