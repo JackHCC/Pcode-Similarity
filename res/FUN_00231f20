@@ -1,0 +1,2 @@
+[ ---  CALL (ram, 0x232a00, 8)]
+[ ---  RETURN (const, 0x1, 4)]
