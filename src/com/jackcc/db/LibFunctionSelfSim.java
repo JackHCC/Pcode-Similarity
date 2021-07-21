@@ -1,12 +1,8 @@
 package com.jackcc.db;
 
-import com.jackcc.util.HashConvert;
 import com.jackcc.util.TypeConversion;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;

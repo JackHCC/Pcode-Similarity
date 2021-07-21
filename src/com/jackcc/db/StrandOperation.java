@@ -2,9 +2,7 @@ package com.jackcc.db;
 
 import com.jackcc.util.TypeConversion;
 
-import java.io.IOException;
 import java.math.BigInteger;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

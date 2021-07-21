@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static com.jackcc.util.HashConvert.byte2str;
-
 public class SimilarityOperation {
 
 

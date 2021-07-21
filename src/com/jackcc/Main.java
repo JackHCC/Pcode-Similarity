@@ -1,31 +1,21 @@
 package com.jackcc;
 
-import com.jackcc.db.FunctionOption;
 import com.jackcc.db.LibFunctionSelfSim;
-import com.jackcc.db.StrandOperation;
 import com.jackcc.db.TargetSimProcess;
 import com.jackcc.db.*;
-import com.jackcc.util.Similarity;
-import com.jackcc.util.StrandsGenerator;
-import com.jackcc.util.TypeConversion;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static com.jackcc.db.TargetSimProcess.getRelativelySim;
 import static com.jackcc.util.HashConvert.*;
-import static com.jackcc.util.SimilarityOperation.calculateSelfSim;
 import static com.jackcc.util.SimilarityOperation.intersection;
-import static com.jackcc.util.StrandStatistics.*;
 import static com.jackcc.util.StrandsGenerator.*;
 
 public class Main {
@@ -63,9 +53,7 @@ public class Main {
 				Double intersectSim = targetSimProcess.getTargetSelfSim(intersect);
 				Double querySim = libFunctionSelfSim.getSelfSim(result.getInt("id"));
 				Double sim =  getRelativelySim(targetSim,querySim,intersectSim);
-
 				if (sim > 0.5) {
-
 					System.out.println(result.getString("func_name") + "  " +sim);
 				}
 			}

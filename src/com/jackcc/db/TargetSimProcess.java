@@ -1,7 +1,5 @@
 package com.jackcc.db;
 
-
-import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static com.jackcc.db.LibFunctionSelfSim.getSim;
-import static com.jackcc.util.HashConvert.byte2str;
 
 
 public class TargetSimProcess {
