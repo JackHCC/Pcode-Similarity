@@ -1,5 +1,6 @@
 package com.jackcc.db;
 
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.Connection;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 
 import static com.jackcc.db.LibFunctionSelfSim.getSim;
 import static com.jackcc.util.HashConvert.byte2str;
+
 
 public class TargetSimProcess {
 
@@ -48,6 +50,7 @@ public class TargetSimProcess {
                 BigInteger probabilityItem = new BigInteger(String.valueOf(integer));
                 targetProbList.add(probabilityItem);
             }
+
             max--;
         }
         double sim = getSim(targetProbList);

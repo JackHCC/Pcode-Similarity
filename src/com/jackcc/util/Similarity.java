@@ -104,7 +104,6 @@ public class Similarity {
 			for (Object k : strandProbabilityReverse.keySet()) {
 				if (k.equals(arrayIntersection.get(i))) {
 					BigInteger probabilityReverse = (BigInteger) strandProbabilityReverse.get(k);
-//                    sim = sim.add(probabilityReverse);
 					simScore = simScore + (Math.log(probabilityReverse.doubleValue()));
 				}
 			}

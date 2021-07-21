@@ -15,8 +15,8 @@ import static com.jackcc.util.HashConvert.calcHash;
 
 public class FunctionOption {
 
-	private JdbcDao db;
-	private Connection conn;
+	public JdbcDao db;
+	public Connection conn;
 
 	public FunctionOption() {
 		this.db = new JdbcDao();
