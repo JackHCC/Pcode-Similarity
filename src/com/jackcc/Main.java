@@ -1,82 +1,51 @@
 package com.jackcc;
 
 import com.jackcc.db.FunctionOption;
-<<<<<<< HEAD
-=======
 import com.jackcc.db.StrandOperation;
->>>>>>> master
 import com.jackcc.util.Similarity;
 import com.jackcc.util.StrandsGenerator;
 
 import java.io.IOException;
-<<<<<<< HEAD
-=======
 import java.math.BigInteger;
->>>>>>> master
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.jackcc.util.HashConvert.*;
 import static com.jackcc.util.StrandStatistics.*;
 import static com.jackcc.util.StrandsGenerator.*;
 
-
 public class Main {
 
-    public static void main(String[] args)
-            throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
+	public static void main(String[] args)
+			throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
 
-<<<<<<< HEAD
 //         Init target strands
-        ArrayList<String> strand = convert2Strand("res/puts");
+		ArrayList<String> strand = convert2Strand("res/puts");
 
 //       // Construct the target hash
-        ArrayList<byte[]> strandByteHash = calcStrandHash(strand);
-        ArrayList<String> strandHash = byte2str(strandByteHash);
+		ArrayList<byte[]> strandByteHash = calcStrandHash(strand);
+		ArrayList<String> strandHash = byte2str(strandByteHash);
 //      Init db connection for function strands
-        FunctionOption funcOp = new FunctionOption();
+		FunctionOption funcOp = new FunctionOption();
 
+		ArrayList<byte[]> libStrands = funcOp.getLibStrandsArray();
 
-=======
+		StrandOperation strandOp = new StrandOperation();
+		HashMap<String, Integer> strandCountMap = getCountOfLibStrand(libStrands);
+		BigInteger sizeOfLib = getSizeOfLib(libStrands);
 
+		strandOp.add(strandCountMap, getProbabilityReverseOfLibStrand(strandCountMap, sizeOfLib));
+		System.out.println(funcOp.getLibStrandsArray());
+		System.out.println(getSizeOfLib(funcOp.getLibStrandsArray()));
+		System.out.println(getCountOfLibStrand(funcOp.getLibStrandsArray()));
 
-
-
-
-        FunctionOption funcOp = new FunctionOption();
-        ArrayList<byte []> libStrands = funcOp.getLibStrandsArray();
-
-        StrandOperation strandOp = new StrandOperation();
-        HashMap<String, Integer> strandCountMap= getCountOfLibStrand(libStrands);
-        BigInteger sizeOfLib = getSizeOfLib(libStrands);
-
-        strandOp.add(strandCountMap, getProbabilityReverseOfLibStrand(strandCountMap, sizeOfLib));
-        System.out.println(funcOp.getLibStrandsArray());
-        System.out.println(getSizeOfLib(funcOp.getLibStrandsArray()));
-        System.out.println(getCountOfLibStrand(funcOp.getLibStrandsArray()));
->>>>>>> master
-
-        /**
-         * Construct Lib P(Hash)
-         **/
-//        ArrayList<ArrayList<byte[]>> p = PGenerator(9);
-//        ArrayList<ArrayList<String>> pString = byte2str(p);
-<<<<<<< HEAD
-
-=======
 //        ArrayList<ArrayList<String>> p = PGenerator();
->>>>>>> master
-//        ArrayList<ArrayList<byte[]>> pHash = calcLibHash(p);
-        /**
-         * q read from P by loop
-         * */
+		/**
+		 * q read from P by loop
+		 * */
 //        Similarity sim = new Similarity(strandByteHash, pHash);
-<<<<<<< HEAD
-//
-=======
-
->>>>>>> master
 //        for (int i =0; i<sim.lib.size(); i++) {
 //            sim.query =sim.lib.get(i);
 //            // Using to test
@@ -108,6 +77,6 @@ public class Main {
 //            System.out.println(sim.relativelySimScore);
 //        }
 
-    }
+	}
 }
 

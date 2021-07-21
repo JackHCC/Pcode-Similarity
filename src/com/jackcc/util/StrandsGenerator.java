@@ -87,9 +87,9 @@ public class StrandsGenerator {
 		ArrayList<String> pathList = getFile("res");
 		ArrayList<String> nameList = getFuncName("res");
 
-		for (int i = 0; i<pathList.size(); i++) {
+		for (int i = 0; i < pathList.size(); i++) {
 
-			ArrayList<byte []> strandsHash = calcStrandHash(convert2Strand(pathList.get(i)));
+			ArrayList<byte[]> strandsHash = calcStrandHash(convert2Strand(pathList.get(i)));
 			functionOption.add(nameList.get(i), strandsHash);
 		}
 	}
