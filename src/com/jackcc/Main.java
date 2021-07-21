@@ -4,17 +4,27 @@ import com.jackcc.db.FunctionOption;
 import com.jackcc.db.LibFunctionSelfSim;
 import com.jackcc.db.StrandOperation;
 import com.jackcc.db.TargetSimProcess;
+import com.jackcc.db.*;
 import com.jackcc.util.Similarity;
 import com.jackcc.util.StrandsGenerator;
+import com.jackcc.util.TypeConversion;
 
+import java.awt.*;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.jackcc.db.TargetSimProcess.getRelativelySim;
 import static com.jackcc.util.HashConvert.*;
+import static com.jackcc.util.SimilarityOperation.calculateSelfSim;
+import static com.jackcc.util.SimilarityOperation.intersection;
 import static com.jackcc.util.StrandStatistics.*;
 import static com.jackcc.util.StrandsGenerator.*;
 
@@ -22,74 +32,48 @@ public class Main {
 
 	public static void main(String[] args)
 			throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
+		long startTime=System.currentTimeMillis();   //start_time
 
-		//         Init target strands
+//         Init target strands
 		ArrayList<String> target = convert2Strand("res/puts");
-
-		// Construct the target hash
-		ArrayList<byte[]> strandByteHash = calcStrandHash(target);
-		ArrayList<String> strandHash = byte2str(strandByteHash);
-
 		TargetSimProcess targetSimProcess = new TargetSimProcess();
-		Double targetSelSim = targetSimProcess.getTargetSelfSim(strandHash);
-		System.out.println(targetSelSim);
+       // Construct the target hash
+		ArrayList<byte[]> strandByteHash = calcStrandHash(target);
+		ArrayList<String> targetHash = byte2str(strandByteHash);
 
 //      Init db connection for function strands
-//		FunctionOption funcOp = new FunctionOption();
-//
-//		ArrayList<byte[]> libStrands = funcOp.getLibStrandsArray();
-//
-//		StrandOperation strandOp = new StrandOperation();
-//		HashMap<String, Integer> strandCountMap = getCountOfLibStrand(libStrands);
-//		BigInteger sizeOfLib = getSizeOfLib(libStrands);
-//
-//		strandOp.add(strandCountMap, getProbabilityReverseOfLibStrand(strandCountMap, sizeOfLib));
-//		System.out.println(funcOp.getLibStrandsArray());
-//		System.out.println(getSizeOfLib(funcOp.getLibStrandsArray()));
-//		System.out.println(getCountOfLibStrand(funcOp.getLibStrandsArray()));
-
-
+		JdbcDao db = new JdbcDao();
+		Connection conn = db.getConnection();
 		LibFunctionSelfSim libFunctionSelfSim = new LibFunctionSelfSim();
-		HashMap<Integer, Double> selfSimMap = libFunctionSelfSim.getSelfSimMap();
-//		libFunctionSelfSim.add(selfSimMap);
-		System.out.println(selfSimMap);
 
-//        ArrayList<ArrayList<String>> p = PGenerator();
-		/**
-		 * q read from P by loop
-		 * */
-//        Similarity sim = new Similarity(strandByteHash, pHash);
-//        for (int i =0; i<sim.lib.size(); i++) {
-//            sim.query =sim.lib.get(i);
-//            // Using to test
-//            sim.sizeOfLib = sim.getLibSize(sim.lib);
-//            sim.strandNumMap = sim.getStrandNum(sim.target, sim.lib);
-//
-//            sim.probabilityReverseMap = sim.getStrandProbabilityReverse(sim.strandNumMap, sim.sizeOfLib);
-//
-//            sim.listIntersection = sim.intersection(byte2str(sim.target), byte2str(sim.query));
-//
-//            sim.simScore = sim.getSim(sim.listIntersection, sim.probabilityReverseMap);
-//            sim.relativelySimScore = sim.getRelativelySim(byte2str(sim.target), sim.query, sim.listIntersection, sim.probabilityReverseMap);
-//
-//
-//            /**
-//             * Print
-//             * */
-//            System.out.println("--------------------------------------------------------------------------------");
-//            System.out.println(sim.sizeOfLib);
-//
-//            System.out.println(sim.strandNumMap);
-//            System.out.println(sim.probabilityReverseMap);
-//
-//            System.out.println(sim.target);
-//            System.out.println(sim.query);
-//            System.out.println(sim.listIntersection);
-//
-//            System.out.println(sim.simScore);
-//            System.out.println(sim.relativelySimScore);
-//        }
+		String sql = "SELECT id, func_name,strands FROM function_strands";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet result = pstmt.executeQuery();
+		ArrayList<ArrayList<byte[]>> libStrands = new ArrayList<>();
+		Double targetSim= targetSimProcess.getTargetSelfSim(targetHash);
 
+		while (result.next()) {
+			ObjectInputStream in = new ObjectInputStream(result.getBinaryStream("strands"));
+			ArrayList<byte[]> strands = (ArrayList<byte[]>) in.readObject();
+			in.close();
+			ArrayList<String> query = byte2str(strands);
+			ArrayList<String> intersect = intersection(query,targetHash);
+
+			if (intersect.size()>0){
+				Double intersectSim = targetSimProcess.getTargetSelfSim(intersect);
+				Double querySim = libFunctionSelfSim.getSelfSim(result.getInt("id"));
+				Double sim =  getRelativelySim(targetSim,querySim,intersectSim);
+
+				if (sim > 0.5) {
+
+					System.out.println(result.getString("func_name") + "  " +sim);
+				}
+			}
+
+		}
+		long endTime = System.currentTimeMillis(); //end time
+		System.out.println("run time： "+(endTime-startTime)+"ms");
 	}
+
 }
 

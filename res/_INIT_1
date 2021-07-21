@@ -1,0 +1,5 @@
+[ ---  CBRANCH (ram, 0x120583, 1) , (register, 0x206, 1), (register, 0x206, 1) INT_EQUAL (unique, 0xbe00, 8) , (const, 0x0, 8), (unique, 0xbe00, 8) LOAD (const, 0x1b1, 4) , (unique, 0x10000029, 8), (unique, 0x10000029, 8) CAST (unique, 0x3200, 8), (unique, 0x3200, 8) PTRADD (ram, 0x4c2e00, 8) , (const, 0x968, 8) , (const, 0x1, 8)]
+[(ram, 0x4c2e00, 8) INDIRECT (ram, 0x4c2e00, 8) , (const, 0x45, 4)]
+[ ---  STORE (const, 0x1b1, 4) , (unique, 0x10000031, 8) , (unique, 0x49b00, 8), (unique, 0x10000031, 8) CAST (unique, 0x3200, 8), (unique, 0x3200, 8) PTRADD (ram, 0x4c2e00, 8) , (const, 0x968, 8) , (const, 0x1, 8), (unique, 0x49b00, 8) CALLOTHER (const, 0x46, 4)]
+[(ram, 0x4c2e00, 8) COPY (ram, 0x4c2e00, 8), (ram, 0x4c2e00, 8) MULTIEQUAL (ram, 0x4c2e00, 8) , (ram, 0x4c2e00, 8)]
+[ ---  RETURN (const, 0x0, 8)]
