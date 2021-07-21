@@ -24,34 +24,34 @@ public class Main {
 			throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
 
 		//         Init target strands
-		ArrayList<String> target = convert2Strand("res/puts");
+//		ArrayList<String> target = convert2Strand("res/puts");
 
 		// Construct the target hash
-		ArrayList<byte[]> strandByteHash = calcStrandHash(target);
-		ArrayList<String> strandHash = byte2str(strandByteHash);
+//		ArrayList<byte[]> strandByteHash = calcStrandHash(target);
+//		ArrayList<String> strandHash = byte2str(strandByteHash);
 
-		TargetSimProcess targetSimProcess = new TargetSimProcess();
-		Double targetSelSim = targetSimProcess.getTargetSelfSim(strandHash);
-		System.out.println(targetSelSim);
+//		TargetSimProcess targetSimProcess = new TargetSimProcess();
+//		Double targetSelSim = targetSimProcess.getTargetSelfSim(strandHash);
+//		System.out.println(targetSelSim);
 
 //      Init db connection for function strands
 //		FunctionOption funcOp = new FunctionOption();
-//
+////
 //		ArrayList<byte[]> libStrands = funcOp.getLibStrandsArray();
-//
+////
 //		StrandOperation strandOp = new StrandOperation();
 //		HashMap<String, Integer> strandCountMap = getCountOfLibStrand(libStrands);
 //		BigInteger sizeOfLib = getSizeOfLib(libStrands);
 //
 //		strandOp.add(strandCountMap, getProbabilityReverseOfLibStrand(strandCountMap, sizeOfLib));
-//		System.out.println(funcOp.getLibStrandsArray());
+//		System.out.println(byte2str(funcOp.getLibStrandsArray()));
 //		System.out.println(getSizeOfLib(funcOp.getLibStrandsArray()));
 //		System.out.println(getCountOfLibStrand(funcOp.getLibStrandsArray()));
 
 
 		LibFunctionSelfSim libFunctionSelfSim = new LibFunctionSelfSim();
 		HashMap<Integer, Double> selfSimMap = libFunctionSelfSim.getSelfSimMap();
-//		libFunctionSelfSim.add(selfSimMap);
+		libFunctionSelfSim.add(selfSimMap);
 		System.out.println(selfSimMap);
 
 //        ArrayList<ArrayList<String>> p = PGenerator();
