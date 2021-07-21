@@ -23,7 +23,7 @@ public class FunctionOption {
 		this.conn = this.db.getConnection();
 	}
 
-	public void add(String funcName,ArrayList<byte[]> funcStrands)
+	public void add(String funcName, ArrayList<byte[]> funcStrands)
 			throws SQLException, IOException, NoSuchAlgorithmException {
 		String sql = "INSERT INTO function_strands ('func_name', 'strands', 'hash') VALUES (?, ?, ?)";
 
@@ -39,14 +39,12 @@ public class FunctionOption {
 		// set parameters
 		pstmt.setString(1,funcName);
 		pstmt.setBytes(2, bytes);
-
 		pstmt.setString(3,funcHash);
-
 		pstmt.executeUpdate();
 	}
 
 	public ArrayList<byte[]> getStrands(int funcID)
-			throws SQLException, IOException, NoSuchAlgorithmException, ClassNotFoundException {
+			throws SQLException, IOException, ClassNotFoundException {
 		String sql = "SELECT strands FROM function_strands WHERE id=?";
 		ResultSet result = null;
 
@@ -64,7 +62,7 @@ public class FunctionOption {
 	}
 
 	public ArrayList<byte []> getStrands(String funcName)
-			throws SQLException, IOException, NoSuchAlgorithmException, ClassNotFoundException {
+			throws SQLException, IOException, ClassNotFoundException {
 		String sql = "SELECT strands FROM function_strands WHERE func_name=?";
 		ResultSet result = null;
 
@@ -80,6 +78,7 @@ public class FunctionOption {
 		return strands;
 	}
 
+<<<<<<< HEAD
 	public String getFuncName(int funcID)
 			throws SQLException, IOException, NoSuchAlgorithmException, ClassNotFoundException {
 		String sql = "SELECT func_name FROM function_strands WHERE id=?";
@@ -118,6 +117,38 @@ public class FunctionOption {
 	public void close() throws SQLException {
 		this.conn.close();
 
+=======
+	/**
+	 * From Lib get all strands Set
+	 * @return All strands Set
+	 * */
+	public ArrayList<ArrayList<byte []>> getLibStrands() throws SQLException, IOException, ClassNotFoundException {
+		String sql = "SELECT strands FROM function_strands";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet result = pstmt.executeQuery();
+		ArrayList<ArrayList<byte []>> libStrands = new ArrayList<>();
+		while (result.next()){
+			ObjectInputStream in  = new ObjectInputStream(result.getBinaryStream("strands"));
+			ArrayList<byte[]> strands = (ArrayList<byte[]>)in.readObject();
+			in.close();
+			libStrands.add(strands);
+		}
+		return libStrands;
+	}
+
+	public ArrayList<byte []> getLibStrandsArray() throws SQLException, IOException, ClassNotFoundException {
+		String sql = "SELECT strands FROM function_strands";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet result = pstmt.executeQuery();
+		ArrayList<byte []> libStrands = new ArrayList<>();
+		while (result.next()){
+			ObjectInputStream in  = new ObjectInputStream(result.getBinaryStream("strands"));
+			ArrayList<byte[]> strands = (ArrayList<byte[]>)in.readObject();
+			in.close();
+			libStrands.addAll(strands);
+		}
+		return libStrands;
+>>>>>>> master
 	}
 
 
