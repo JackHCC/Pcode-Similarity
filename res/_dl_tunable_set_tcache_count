@@ -1,0 +1,5 @@
+[ ---  CBRANCH (ram, 0x421440, 1) , (unique, 0xc780, 1), (unique, 0xc780, 1) INT_LESS (const, 0xffff, 8) , (unique, 0xbd80, 8), (unique, 0xbd80, 8) LOAD (const, 0x1b1, 4) , (register, 0x38, 8)]
+[(ram, 0x4c5760, 8) COPY (unique, 0xbd80, 8)]
+[ ---  RETURN (const, 0x0, 8)]
+[(ram, 0x4c5760, 8) COPY (ram, 0x4c5760, 8)]
+[ ---  RETURN (const, 0x0, 8)]
