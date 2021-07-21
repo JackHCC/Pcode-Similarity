@@ -1,0 +1,4 @@
+[ ---  CBRANCH (ram, 0x48c1e4, 1) , (unique, 0xc800, 1), (unique, 0xc800, 1) INT_LESS (const, 0x7fffffff, 8) , (register, 0x10, 8)]
+[(register, 0x10, 8) COPY (const, 0x7fffffff, 8)]
+[ ---  CALLOTHER (const, 0x5, 4)]
+[ ---  RETURN (const, 0x0, 8) , (VARIABLE, 0x0, 4), (VARIABLE, 0x0, 4) INT_ADD (unique, 0x10000023, 16) , (const, 0xd9, 8), (unique, 0x10000023, 16) INT_LEFT (unique, 0x10000013, 16) , (const, 0x40, 16), (unique, 0x10000013, 16) INT_SEXT (unique, 0x10000033, 8), (unique, 0x10000033, 8) CAST (register, 0x10, 8), (register, 0x10, 8) MULTIEQUAL (register, 0x10, 8) , (register, 0x10, 8)]

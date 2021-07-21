@@ -1,6 +1,6 @@
 package com.jackcc.db;
 
-import com.jackcc.util.HashConvert;
+import com.jackcc.util.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -9,6 +9,9 @@ import java.io.ObjectOutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
+
+import static com.jackcc.util.HashConvert.byte2str;
+import static com.jackcc.util.HashConvert.calcHash;
 
 public class FunctionOption {
 
@@ -31,7 +34,7 @@ public class FunctionOption {
 		oos.writeObject(funcStrands);
 		byte[] bytes = baos.toByteArray();
 
-		String funcHash = HashConvert.calcHash(HashConvert.byte2str(funcStrands));
+		String funcHash = calcHash(HashConvert.byte2str(funcStrands));
 
 		// set parameters
 		pstmt.setString(1,funcName);
@@ -75,6 +78,46 @@ public class FunctionOption {
 		ArrayList<byte[]> strands = (ArrayList<byte[]>)in.readObject();
 		in.close();
 		return strands;
+	}
+
+	public String getFuncName(int funcID)
+			throws SQLException, IOException, NoSuchAlgorithmException, ClassNotFoundException {
+		String sql = "SELECT func_name FROM function_strands WHERE id=?";
+		ResultSet result = null;
+		String funcName = new String();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1, funcID);
+		result = pstmt.executeQuery();
+
+		while (result.next()){
+			funcName = result.getString("func_name");
+		}
+
+
+		return funcName;
+	}
+
+	public String getFuncName(ArrayList<byte[]> funcStrands)
+			throws SQLException, IOException, NoSuchAlgorithmException, ClassNotFoundException {
+		String sql = "SELECT func_name FROM function_strands WHERE hash=?";
+		ResultSet result = null;
+		String funcName = new String();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, calcHash(byte2str(funcStrands)));
+		result = pstmt.executeQuery();
+
+		while (result.next()){
+			funcName = result.getString("func_name");
+		}
+
+		return funcName;
+	}
+
+	public void close() throws SQLException {
+		this.conn.close();
+
 	}
 
 

@@ -2,6 +2,7 @@ package com.jackcc;
 
 import com.jackcc.db.FunctionOption;
 import com.jackcc.util.Similarity;
+import com.jackcc.util.StrandsGenerator;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -17,30 +18,29 @@ public class Main {
     public static void main(String[] args)
             throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
 
-//         Init strands
+//         Init target strands
+        ArrayList<String> strand = convert2Strand("res/puts");
 
-        ArrayList<String> strand = convert2Strand("res/memset");
-
-        // Construct the target procedure
+//       // Construct the target hash
         ArrayList<byte[]> strandByteHash = calcStrandHash(strand);
-//        ArrayList<String> strandHash = byte2str(strandByteHash);
-
+        ArrayList<String> strandHash = byte2str(strandByteHash);
+//      Init db connection for function strands
         FunctionOption funcOp = new FunctionOption();
-        funcOp.add("memset",strandByteHash);
-        ArrayList<byte []> strands =  funcOp.getStrands(8);
-        System.out.println(strands);
+
+
+
         /**
          * Construct Lib P(Hash)
          **/
 //        ArrayList<ArrayList<byte[]>> p = PGenerator(9);
 //        ArrayList<ArrayList<String>> pString = byte2str(p);
-//        ArrayList<ArrayList<String>> p = PGenerator();
+
 //        ArrayList<ArrayList<byte[]>> pHash = calcLibHash(p);
         /**
          * q read from P by loop
          * */
 //        Similarity sim = new Similarity(strandByteHash, pHash);
-
+//
 //        for (int i =0; i<sim.lib.size(); i++) {
 //            sim.query =sim.lib.get(i);
 //            // Using to test
