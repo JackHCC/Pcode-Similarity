@@ -1,5 +1,0 @@
-[ ---  STORE (const, 0x1b1, 4) , (register, 0x38, 8) , (ram, 0x4c50f0, 8)]
-[ ---  STORE (const, 0x1b1, 4) , (register, 0x30, 8) , (ram, 0x4c8308, 8), (ram, 0x4c8308, 8) INDIRECT (ram, 0x4c8308, 8) , (const, 0x2, 4)]
-[(ram, 0x4c50f0, 8) COPY (ram, 0x4c50f0, 8), (ram, 0x4c50f0, 8) INDIRECT (ram, 0x4c50f0, 8) , (const, 0x5, 4), (ram, 0x4c50f0, 8) INDIRECT (ram, 0x4c50f0, 8) , (const, 0x2, 4)]
-[(ram, 0x4c8308, 8) COPY (ram, 0x4c8308, 8), (ram, 0x4c8308, 8) INDIRECT (ram, 0x4c8308, 8) , (const, 0x5, 4), (ram, 0x4c8308, 8) INDIRECT (ram, 0x4c8308, 8) , (const, 0x2, 4)]
-[ ---  RETURN (const, 0x0, 8)]

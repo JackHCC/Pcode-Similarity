@@ -1,9 +1,7 @@
 package com.jackcc.db;
 
-<<<<<<< Updated upstream
+
 import java.io.IOException;
-=======
->>>>>>> Stashed changes
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static com.jackcc.db.LibFunctionSelfSim.getSim;
-<<<<<<< Updated upstream
 import static com.jackcc.util.HashConvert.byte2str;
-=======
->>>>>>> Stashed changes
+
 
 public class TargetSimProcess {
 
@@ -54,10 +50,7 @@ public class TargetSimProcess {
                 BigInteger probabilityItem = new BigInteger(String.valueOf(integer));
                 targetProbList.add(probabilityItem);
             }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
             max--;
         }
         double sim = getSim(targetProbList);
@@ -68,7 +61,6 @@ public class TargetSimProcess {
     public static Double getRelativelySim(Double targetSelfSim, Double querySelfSim, Double intersectionSim){
         return intersectionSim/Math.sqrt(targetSelfSim*querySelfSim);
     }
-<<<<<<< Updated upstream
 
     public static ArrayList<Double> getRelativelySim(Double targetSelfSim, ArrayList<Double> querySelfSim, ArrayList<Double> intersectionSim){
         ArrayList<Double> simList = new ArrayList<>();
@@ -85,6 +77,4 @@ public class TargetSimProcess {
         return simList;
     }
 
-=======
->>>>>>> Stashed changes
 }

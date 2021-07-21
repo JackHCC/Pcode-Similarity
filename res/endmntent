@@ -1,0 +1,4 @@
+[ ---  CBRANCH (ram, 0x1fdda0, 1) , (register, 0x206, 1), (register, 0x206, 1) INT_NOTEQUAL (register, 0x38, 8) , (const, 0x0, 8)]
+[ ---  RETURN (const, 0x0, 8) , (register, 0x0, 8), (register, 0x0, 8) COPY (const, 0x1, 8)]
+[ ---  CALL (ram, 0x16d210, 8) , (register, 0x38, 8)]
+[ ---  RETURN (const, 0x0, 8) , (register, 0x0, 8), (register, 0x0, 8) COPY (const, 0x1, 8)]

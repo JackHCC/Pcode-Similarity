@@ -1,6 +1,0 @@
-[ ---  CBRANCH (ram, 0x4213a6, 1) , (register, 0x206, 1), (register, 0x206, 1) INT_EQUAL (unique, 0xbc80, 4) , (const, 0x2, 4), (unique, 0xbc80, 4) LOAD (const, 0x1b1, 4) , (register, 0x38, 8)]
-[ ---  STORE (const, 0x1b1, 4) , (register, 0x38, 8) , (const, 0x2, 4)]
-[ ---  CBRANCH (ram, 0x4213c0, 1) , (register, 0x206, 1), (register, 0x206, 1) INT_NOTEQUAL (unique, 0xbc80, 4) , (const, 0x0, 4), (unique, 0xbc80, 4) LOAD (const, 0x1b1, 4) , (register, 0x38, 8)]
-[ ---  RETURN (const, 0x0, 8)]
-[ ---  CALLOTHER (const, 0x5, 4)]
-[ ---  BRANCH (ram, 0x42139b, 1)]
