@@ -1,14 +1,18 @@
 package com.jackcc;
 
 import com.jackcc.db.FunctionOption;
+import com.jackcc.db.StrandOperation;
 import com.jackcc.util.Similarity;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.jackcc.util.HashConvert.*;
+import static com.jackcc.util.StrandStatistics.*;
 import static com.jackcc.util.StrandsGenerator.*;
 
 
@@ -17,18 +21,23 @@ public class Main {
     public static void main(String[] args)
             throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
 
-//         Init strands
 
-        ArrayList<String> strand = convert2Strand("res/memset");
 
-        // Construct the target procedure
-        ArrayList<byte[]> strandByteHash = calcStrandHash(strand);
-//        ArrayList<String> strandHash = byte2str(strandByteHash);
+
+
 
         FunctionOption funcOp = new FunctionOption();
-        funcOp.add("memset",strandByteHash);
-        ArrayList<byte []> strands =  funcOp.getStrands(8);
-        System.out.println(strands);
+        ArrayList<byte []> libStrands = funcOp.getLibStrandsArray();
+
+        StrandOperation strandOp = new StrandOperation();
+        HashMap<String, Integer> strandCountMap= getCountOfLibStrand(libStrands);
+        BigInteger sizeOfLib = getSizeOfLib(libStrands);
+
+        strandOp.add(strandCountMap, getProbabilityReverseOfLibStrand(strandCountMap, sizeOfLib));
+        System.out.println(funcOp.getLibStrandsArray());
+        System.out.println(getSizeOfLib(funcOp.getLibStrandsArray()));
+        System.out.println(getCountOfLibStrand(funcOp.getLibStrandsArray()));
+
         /**
          * Construct Lib P(Hash)
          **/
