@@ -1,7 +1,9 @@
 package com.jackcc;
 
 import com.jackcc.db.FunctionOption;
+import com.jackcc.db.LibFunctionSelfSim;
 import com.jackcc.db.StrandOperation;
+import com.jackcc.db.TargetSimProcess;
 import com.jackcc.util.Similarity;
 import com.jackcc.util.StrandsGenerator;
 
@@ -21,25 +23,36 @@ public class Main {
 	public static void main(String[] args)
 			throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
 
-//         Init target strands
-		ArrayList<String> strand = convert2Strand("res/puts");
+		//         Init target strands
+		ArrayList<String> target = convert2Strand("res/puts");
 
-//       // Construct the target hash
-		ArrayList<byte[]> strandByteHash = calcStrandHash(strand);
+		// Construct the target hash
+		ArrayList<byte[]> strandByteHash = calcStrandHash(target);
 		ArrayList<String> strandHash = byte2str(strandByteHash);
+
+		TargetSimProcess targetSimProcess = new TargetSimProcess();
+		Double targetSelSim = targetSimProcess.getTargetSelfSim(strandHash);
+		System.out.println(targetSelSim);
+
 //      Init db connection for function strands
-		FunctionOption funcOp = new FunctionOption();
+//		FunctionOption funcOp = new FunctionOption();
+//
+//		ArrayList<byte[]> libStrands = funcOp.getLibStrandsArray();
+//
+//		StrandOperation strandOp = new StrandOperation();
+//		HashMap<String, Integer> strandCountMap = getCountOfLibStrand(libStrands);
+//		BigInteger sizeOfLib = getSizeOfLib(libStrands);
+//
+//		strandOp.add(strandCountMap, getProbabilityReverseOfLibStrand(strandCountMap, sizeOfLib));
+//		System.out.println(funcOp.getLibStrandsArray());
+//		System.out.println(getSizeOfLib(funcOp.getLibStrandsArray()));
+//		System.out.println(getCountOfLibStrand(funcOp.getLibStrandsArray()));
 
-		ArrayList<byte[]> libStrands = funcOp.getLibStrandsArray();
 
-		StrandOperation strandOp = new StrandOperation();
-		HashMap<String, Integer> strandCountMap = getCountOfLibStrand(libStrands);
-		BigInteger sizeOfLib = getSizeOfLib(libStrands);
-
-		strandOp.add(strandCountMap, getProbabilityReverseOfLibStrand(strandCountMap, sizeOfLib));
-		System.out.println(funcOp.getLibStrandsArray());
-		System.out.println(getSizeOfLib(funcOp.getLibStrandsArray()));
-		System.out.println(getCountOfLibStrand(funcOp.getLibStrandsArray()));
+		LibFunctionSelfSim libFunctionSelfSim = new LibFunctionSelfSim();
+		HashMap<Integer, Double> selfSimMap = libFunctionSelfSim.getSelfSimMap();
+//		libFunctionSelfSim.add(selfSimMap);
+		System.out.println(selfSimMap);
 
 //        ArrayList<ArrayList<String>> p = PGenerator();
 		/**
