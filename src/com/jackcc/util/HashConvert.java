@@ -16,62 +16,60 @@ import java.util.ArrayList;
 
 public class HashConvert {
 
-    /**
-     * Strands to Hash
-     * */
-    public static ArrayList<byte []> calcStrandHash(ArrayList<String> strands)
-            throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        ArrayList<byte []> hashStrands = new ArrayList<>();
-        for (int index = 0; index < strands.size(); index++) {
-            String strand = strands.get(index);
-            byte[] bytesOfMessage = strand.getBytes("UTF-8");
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] hash = md.digest(bytesOfMessage);
-            hashStrands.add(hash);
-        }
-        return hashStrands;
-    }
+	/**
+	 * Strands to Hash
+	 * */
+	public static ArrayList<byte[]> calcStrandHash(ArrayList<String> strands)
+			throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		ArrayList<byte[]> hashStrands = new ArrayList<>();
+		for (int index = 0; index < strands.size(); index++) {
+			String strand = strands.get(index);
+			byte[] bytesOfMessage = strand.getBytes("UTF-8");
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] hash = md.digest(bytesOfMessage);
+			hashStrands.add(hash);
+		}
+		return hashStrands;
+	}
 
-    public static ArrayList<ArrayList<byte []>> calcLibHash(ArrayList<ArrayList<String>> libStrand)
-            throws NoSuchAlgorithmException, IOException, SQLException {
-        ArrayList<ArrayList<byte []>> libHash= new ArrayList<>();
+	public static ArrayList<ArrayList<byte[]>> calcLibHash(ArrayList<ArrayList<String>> libStrand)
+			throws NoSuchAlgorithmException, IOException, SQLException {
+		ArrayList<ArrayList<byte[]>> libHash = new ArrayList<>();
 
+		for (int i = 0; i < libStrand.size(); i++) {
+			ArrayList<byte[]> hashStrands = new ArrayList<>();
+			ArrayList<String> strands = libStrand.get(i);
+			for (int j = 0; j < strands.size(); j++) {
+				String strand = strands.get(j);
+				byte[] bytesOfMessage = strand.getBytes("UTF-8");
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				byte[] hash = md.digest(bytesOfMessage);
+				hashStrands.add(hash);
+			}
 
-        for (int i =0; i< libStrand.size(); i++) {
-            ArrayList<byte []> hashStrands = new ArrayList<>();
-            ArrayList<String> strands = libStrand.get(i);
-            for (int j = 0; j < strands.size(); j++) {
-                String strand = strands.get(j);
-                byte[] bytesOfMessage = strand.getBytes("UTF-8");
-                MessageDigest md = MessageDigest.getInstance("MD5");
-                byte[] hash = md.digest(bytesOfMessage);
-                hashStrands.add(hash);
-            }
+			libHash.add(hashStrands);
+		}
 
+		return libHash;
+	}
 
-            libHash.add(hashStrands);
-        }
+	public static String calcHash(ArrayList<String> strands)
+			throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		String data = new String();
 
-        return libHash;
-    }
+		for (int index = 0; index < strands.size(); index++) {
+			data += strands.get(index);
+		}
+		byte[] bytesOfMessage = data.getBytes("UTF-8");
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] hash = md.digest(bytesOfMessage);
 
-    public static String calcHash(ArrayList<String> strands)
-            throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        String data = new String();
+		return byte2str(hash);
+	}
 
-        for (int index = 0; index < strands.size(); index++) {
-            data  += strands.get(index);
-        }
-        byte[] bytesOfMessage = data.getBytes("UTF-8");
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] hash = md.digest(bytesOfMessage);
-
-        return byte2str(hash);
-    }
-
-    /**
-     * Hash to String: Using to test!!!
-     * */
+	/**
+	 * Hash to String: Using to test!!!
+	 * */
 
 //    public static ArrayList<ArrayList<String>> byte2str(ArrayList<ArrayList< byte[]>> hashStrands) {
 //        ArrayList<ArrayList<String>> hashStrStrands = new ArrayList<>();
@@ -89,26 +87,23 @@ public class HashConvert {
 //        }
 //        return hashStrStrands;
 //    }
+	public static ArrayList<String> byte2str(ArrayList<byte[]> hashStrands) {
+		ArrayList<String> hashStrStrands = new ArrayList<>();
 
-    public static ArrayList<String> byte2str(ArrayList<byte[]> hashStrands) {
-        ArrayList<String> hashStrStrands = new ArrayList<>();
+		for (int index = 0; index < hashStrands.size(); index++) {
 
-        for (int index = 0; index < hashStrands.size(); index++) {
+			byte[] hashStrand = hashStrands.get(index);
+			BigInteger bigInt = new BigInteger(1, hashStrand);
 
-            byte[] hashStrand = hashStrands.get(index);
-            BigInteger bigInt = new BigInteger(1, hashStrand);
+			String hashText = bigInt.toString(16);
+			hashStrStrands.add(hashText);
+		}
+		return hashStrStrands;
+	}
 
-            String hashText = bigInt.toString(16);
-            hashStrStrands.add(hashText);
-        }
-        return hashStrStrands;
-    }
-
-    public static String byte2str(byte[] hashStrand){
-        BigInteger bigInt = new BigInteger(1, hashStrand);
-        return bigInt.toString(16);
-    }
-
-
+	public static String byte2str(byte[] hashStrand) {
+		BigInteger bigInt = new BigInteger(1, hashStrand);
+		return bigInt.toString(16);
+	}
 
 }

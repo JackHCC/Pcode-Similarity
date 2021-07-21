@@ -1,42 +1,49 @@
 package com.jackcc.db;
+
 import java.sql.*;
+
 public class JdbcDao {
 
 	private String driverStr = "org.sqlite.JDBC";
 	private String connStr = "jdbc:sqlite:library.db";
 	private Connection connection = null;
-	private Statement stmt=null;
+	private Statement stmt = null;
 	private ResultSet rs = null;
 
 	public JdbcDao() {
 		try {
 			Class.forName(driverStr);
-		} catch (ClassNotFoundException e) {
+		}
+		catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public Connection getConnection(){
+
+	public Connection getConnection() {
 		try {
-			connection=DriverManager.getConnection(connStr);
-		} catch (SQLException e) {
+			connection = DriverManager.getConnection(connStr);
+		}
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return connection;
 	}
 
-	private Statement createStatement(){
+	private Statement createStatement() {
 		try {
-			stmt=getConnection().createStatement();
-		} catch (Exception e) {
+			stmt = getConnection().createStatement();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		return stmt;
 	}
+
 	public ResultSet executeQuery(String sql) {
 		try {
 			rs = createStatement().executeQuery(sql);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		return rs;
@@ -46,13 +53,14 @@ public class JdbcDao {
 		int result = 0;
 		try {
 			result = createStatement().executeUpdate(sql);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
-	public void close(){
+
+	public void close() {
 		try {
 			if (rs != null)
 				rs.close();
@@ -60,10 +68,10 @@ public class JdbcDao {
 				stmt.close();
 			if (connection != null)
 				connection.close();
-		} catch (SQLException e) {
+		}
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 }

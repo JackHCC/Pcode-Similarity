@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-211.7628.21" />
+  <component name="dataSourceStorageLocal" created-in="IU-211.7628.21">
+    <data-source name="library" uuid="1b7d8b0a-8bf0-4522-9b23-2ee3100ca9d0">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
+      <auth-provider>no-auth</auth-provider>
+      <schema-mapping />
+    </data-source>
+  </component>
 </project>

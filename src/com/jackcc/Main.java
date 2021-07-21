@@ -3,6 +3,7 @@ package com.jackcc;
 import com.jackcc.db.FunctionOption;
 import com.jackcc.db.StrandOperation;
 import com.jackcc.util.Similarity;
+import com.jackcc.util.StrandsGenerator;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -15,41 +16,36 @@ import static com.jackcc.util.HashConvert.*;
 import static com.jackcc.util.StrandStatistics.*;
 import static com.jackcc.util.StrandsGenerator.*;
 
-
 public class Main {
 
-    public static void main(String[] args)
-            throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
+	public static void main(String[] args)
+			throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
 
+//         Init target strands
+		ArrayList<String> strand = convert2Strand("res/puts");
 
+//       // Construct the target hash
+		ArrayList<byte[]> strandByteHash = calcStrandHash(strand);
+		ArrayList<String> strandHash = byte2str(strandByteHash);
+//      Init db connection for function strands
+		FunctionOption funcOp = new FunctionOption();
 
+		ArrayList<byte[]> libStrands = funcOp.getLibStrandsArray();
 
+		StrandOperation strandOp = new StrandOperation();
+		HashMap<String, Integer> strandCountMap = getCountOfLibStrand(libStrands);
+		BigInteger sizeOfLib = getSizeOfLib(libStrands);
 
+		strandOp.add(strandCountMap, getProbabilityReverseOfLibStrand(strandCountMap, sizeOfLib));
+		System.out.println(funcOp.getLibStrandsArray());
+		System.out.println(getSizeOfLib(funcOp.getLibStrandsArray()));
+		System.out.println(getCountOfLibStrand(funcOp.getLibStrandsArray()));
 
-        FunctionOption funcOp = new FunctionOption();
-        ArrayList<byte []> libStrands = funcOp.getLibStrandsArray();
-
-        StrandOperation strandOp = new StrandOperation();
-        HashMap<String, Integer> strandCountMap= getCountOfLibStrand(libStrands);
-        BigInteger sizeOfLib = getSizeOfLib(libStrands);
-
-        strandOp.add(strandCountMap, getProbabilityReverseOfLibStrand(strandCountMap, sizeOfLib));
-        System.out.println(funcOp.getLibStrandsArray());
-        System.out.println(getSizeOfLib(funcOp.getLibStrandsArray()));
-        System.out.println(getCountOfLibStrand(funcOp.getLibStrandsArray()));
-
-        /**
-         * Construct Lib P(Hash)
-         **/
-//        ArrayList<ArrayList<byte[]>> p = PGenerator(9);
-//        ArrayList<ArrayList<String>> pString = byte2str(p);
 //        ArrayList<ArrayList<String>> p = PGenerator();
-//        ArrayList<ArrayList<byte[]>> pHash = calcLibHash(p);
-        /**
-         * q read from P by loop
-         * */
+		/**
+		 * q read from P by loop
+		 * */
 //        Similarity sim = new Similarity(strandByteHash, pHash);
-
 //        for (int i =0; i<sim.lib.size(); i++) {
 //            sim.query =sim.lib.get(i);
 //            // Using to test
@@ -81,6 +77,6 @@ public class Main {
 //            System.out.println(sim.relativelySimScore);
 //        }
 
-    }
+	}
 }
 
