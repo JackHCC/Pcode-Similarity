@@ -24,6 +24,7 @@ public class Main {
 			throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
 		long startTime=System.currentTimeMillis();   //start_time
 
+
 //         Init target strands
 		ArrayList<String> target = convert2Strand("res/puts");
 		TargetSimProcess targetSimProcess = new TargetSimProcess();
@@ -51,7 +52,7 @@ public class Main {
 
 			if (intersect.size()>0){
 				Double intersectSim = targetSimProcess.getTargetSelfSim(intersect);
-				Double querySim = libFunctionSelfSim.getSelfSim(result.getInt("id"));
+				Double querySim = libFunctionSelfSim.getFunctionSelfSim(result.getInt("id"));
 				Double sim =  getRelativelySim(targetSim,querySim,intersectSim);
 				if (sim > 0.5) {
 					System.out.println(result.getString("func_name") + "  " +sim);
@@ -59,8 +60,10 @@ public class Main {
 			}
 
 		}
+
 		long endTime = System.currentTimeMillis(); //end time
 		System.out.println("run time： "+(endTime-startTime)+"ms");
+
 	}
 
 }

@@ -1,6 +1,10 @@
 package com.jackcc.util;
 
+import com.jackcc.db.FunctionOption;
+
+import java.io.IOException;
 import java.math.BigInteger;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,7 +18,16 @@ public class StrandStatistics {
 		return libSize;
 	}
 
-	// get every strand count
+	// direct get count from table
+	public static BigInteger getSizeOfLib() throws SQLException, IOException, ClassNotFoundException {
+		FunctionOption functionOption = new FunctionOption();
+		ArrayList<byte[]> libStrands = functionOption.getLibStrandsArray();
+		BigInteger libSize = new BigInteger(String.valueOf(libStrands.size()));
+		return libSize;
+	}
+
+
+	// statistic every strand count in the whole lib !!!
 	public static HashMap<String, Integer> getCountOfLibStrand(ArrayList<byte[]> libStrands) {
 		if (libStrands == null || libStrands.size() == 0)
 			return null;
@@ -27,6 +40,19 @@ public class StrandStatistics {
 		return countStrandMap;
 	}
 
+	// get every strand count
+	public static HashMap<String, Integer> getCountOfStrand(ArrayList<String> strands) {
+		if (strands == null || strands.size() == 0)
+			return null;
+		HashMap<String, Integer> countStrandMap = new HashMap<>();
+		for (String temp : strands) {
+			Integer count = countStrandMap.get(temp);
+			countStrandMap.put(temp, (count == null) ? 1 : count + 1);
+		}
+		return countStrandMap;
+	}
+
+
 	// get every strand probability reverse
 	public static HashMap<String, BigInteger> getProbabilityReverseOfLibStrand(
 			HashMap countStrandMap, BigInteger libSize) {
@@ -37,7 +63,6 @@ public class StrandStatistics {
 			BigInteger probabilityReverse = libSize.divide(value);
 			probabilityReverseMap.put((String) k, probabilityReverse);
 		});
-
 		return probabilityReverseMap;
 	}
 
