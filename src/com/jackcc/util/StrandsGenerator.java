@@ -50,7 +50,7 @@ public class StrandsGenerator {
 		}
 	}
 
-	private static ArrayList getFile(String path) {
+	public static ArrayList getFile(String path) {
 		ArrayList<String> pathList = new ArrayList<>();
 		// get file list where the path has
 		File file = new File(path);
@@ -69,7 +69,7 @@ public class StrandsGenerator {
 		return pathList;
 	}
 
-	private static ArrayList getFuncName(String path) {
+	public static ArrayList getFuncName(String path) {
 		ArrayList<String> nameList = new ArrayList<>();
 		// get file list where the path has
 		File file = new File(path);

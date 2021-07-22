@@ -3,6 +3,7 @@ package com.jackcc;
 import com.jackcc.db.LibFunctionSelfSim;
 import com.jackcc.db.TargetSimProcess;
 import com.jackcc.db.*;
+import com.jackcc.util.StrandsGenerator;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,47 +23,38 @@ public class Main {
 
 	public static void main(String[] args)
 			throws IOException, NoSuchAlgorithmException, SQLException, ClassNotFoundException {
-		long startTime=System.currentTimeMillis();   //start_time
 
+		long startTime = System.currentTimeMillis();   //start_time
 
-//         Init target strands
-		ArrayList<String> target = convert2Strand("res/puts");
 		TargetSimProcess targetSimProcess = new TargetSimProcess();
-       // Construct the target hash
-		ArrayList<byte[]> strandByteHash = calcStrandHash(target);
-		ArrayList<String> targetHash = byte2str(strandByteHash);
+		StrandsGenerator strandsGenerator =new StrandsGenerator();
 
-//      Init db connection for function strands
-		JdbcDao db = new JdbcDao();
-		Connection conn = db.getConnection();
-		LibFunctionSelfSim libFunctionSelfSim = new LibFunctionSelfSim();
+		ArrayList<String> pathList = strandsGenerator.getFile("test");
+		ArrayList<String> nameList = strandsGenerator.getFuncName("test");
+//		for (int i =0;i<pathList.size();i++){
+//
+////			Init target strands
+//			String target_name = nameList.get(i);
+//			ArrayList<String> target = convert2Strand(pathList.get(i));
+//			ArrayList<byte[]> strandByteHash = calcStrandHash(target);
+//
+//			// Construct the target hash
+//			ArrayList<String> targetHash = byte2str(strandByteHash);
+//
+////			calc sim
+//			targetSimProcess.calcSim(target_name,targetHash);
+//		}
 
-		String sql = "SELECT id, func_name,strands FROM function_strands";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		ResultSet result = pstmt.executeQuery();
-		ArrayList<ArrayList<byte[]>> libStrands = new ArrayList<>();
-		Double targetSim= targetSimProcess.getTargetSelfSim(targetHash);
+		ArrayList<String> target = convert2Strand("res/memcpy");
+			ArrayList<byte[]> strandByteHash = calcStrandHash(target);
 
-		while (result.next()) {
-			ObjectInputStream in = new ObjectInputStream(result.getBinaryStream("strands"));
-			ArrayList<byte[]> strands = (ArrayList<byte[]>) in.readObject();
-			in.close();
-			ArrayList<String> query = byte2str(strands);
-			ArrayList<String> intersect = intersection(query,targetHash);
+			// Construct the target hash
+			ArrayList<String> targetHash = byte2str(strandByteHash);
 
-			if (intersect.size()>0){
-				Double intersectSim = targetSimProcess.getTargetSelfSim(intersect);
-				Double querySim = libFunctionSelfSim.getFunctionSelfSim(result.getInt("id"));
-				Double sim =  getRelativelySim(targetSim,querySim,intersectSim);
-				if (sim > 0.5) {
-					System.out.println(result.getString("func_name") + "  " +sim);
-				}
-			}
-
-		}
-
+//			calc sim
+			targetSimProcess.calcSim("puts",targetHash);
 		long endTime = System.currentTimeMillis(); //end time
-		System.out.println("run time： "+(endTime-startTime)+"ms");
+		System.out.println("run time： " + (endTime - startTime) + "ms");
 
 	}
 
