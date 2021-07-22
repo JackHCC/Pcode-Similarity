@@ -73,6 +73,18 @@ public class TargetSimProcess {
     }
 
 
+    public Double getIntersectSim(ArrayList<String> intersect) throws SQLException, IOException, ClassNotFoundException {
+
+        HashMap<String, BigInteger> intersectProbMap = getProbabilityReverseOfLibStrand(getCountOfStrand(intersect), getSizeOfLib());
+
+        TypeConversion typeConversion = new TypeConversion();
+        ArrayList<BigInteger> intersectProbList = typeConversion.hashMapValue2list(intersectProbMap);
+        double intersectSim = getSim(intersectProbList);
+
+        return intersectSim;
+    }
+
+
 
     public static Double getRelativelySim(Double targetSelfSim, Double querySelfSim, Double intersectionSim){
         return intersectionSim/Math.sqrt(targetSelfSim*querySelfSim);
@@ -113,11 +125,11 @@ public class TargetSimProcess {
             ArrayList<String> intersect = intersection(query,targetHash);
 
             if (intersect.size()>0){
-                Double intersectSim = this.getTargetSelfSim(intersect);
+                Double intersectSim = this.getIntersectSim(intersect);
                 Double querySim = libFunctionSelfSim.getFunctionSelfSim(result.getInt("id"));
                 Double sim =  getRelativelySim(targetSim,querySim,intersectSim);
 
-                if (sim > 0.5) {
+                if (sim > 0.9) {
                     System.out.println( func_name + "  >>  " +result.getString("func_name") + " >> " +sim);
                 }
             }
